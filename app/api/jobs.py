@@ -22,13 +22,28 @@ router = APIRouter(
 def create_image_processing_job(
     db: Session = Depends(get_db),
 ):
-    pending_count = db.scalar(
-        select(func.count())
-        .select_from(Image)
-        .where(Image.processing_status == "pending")
+    active_job = db.scalar(
+        select(ProcessingJob).where(
+            ProcessingJob.job_type == "image_processing",
+            ProcessingJob.status.in_(
+                ["queued", "processing"]
+            ),
+        )
     )
 
-    if pending_count == 0:
+    if active_job is not None:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="An image processing job is already active.",
+        )
+
+    pending_count = db.scalar(
+        select(func.count(Image.id)).where(
+            Image.processing_status == "pending"
+        )
+    )
+
+    if not pending_count:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail="There are no pending images to process.",
@@ -38,6 +53,8 @@ def create_image_processing_job(
         job_type="image_processing",
         status="queued",
         total_items=pending_count,
+        processed_items=0,
+        failed_items=0,
     )
 
     db.add(job)

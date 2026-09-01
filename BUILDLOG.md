@@ -69,3 +69,24 @@ Implemented the first working image analysis flow using a local Ollama vision mo
 Initially tested Gemini for image analysis, but the free-tier request quota was reached. Switched the vision provider to local Ollama using `gemma3:4b` so the dataset can be processed without depending on an external API quota.
 
 Successfully tested the pipeline using `fox_01.jpg`. The model identified the subject as `fox` with a confidence score of `0.98`, and the result was successfully saved to PostgreSQL.
+
+## Stage 4B - Batch Image Processing
+
+Implemented background batch processing for the image understanding pipeline.
+
+- Added a database-backed worker that processes queued image-processing jobs.
+- Added automatic processing of all pending images.
+- Added retry handling for failed image-analysis attempts.
+- Added job progress tracking using total, processed, and failed item counts.
+- Added protection against creating multiple active image-processing jobs.
+- Reused the existing Ollama image-analysis service for batch processing.
+- Continued recording AI model usage for each successfully processed image.
+
+The batch successfully processed the remaining image dataset.
+
+Final result:
+
+- 50 images completed
+- 50 image metadata records created
+- Vision usage logs recorded
+- No remaining pending images

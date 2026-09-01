@@ -84,3 +84,47 @@ Vision model usage was also recorded in the `ai_cost_logs` table. Since Ollama r
 The image completed the following flow successfully:
 
 Image -> Vision Model -> Pydantic Validation -> Confidence Check -> Database -> Completed
+
+## Stage 4B - Batch Image Processing
+
+The background image-processing worker successfully processed the complete image dataset using the local Ollama vision model.
+
+### Final Results
+
+- Total images: 50
+- Completed images: 50
+- Image metadata records: 50
+- Remaining pending images: 0
+- Vision model usage recorded in `ai_cost_logs`
+
+### Image Status Verification
+
+The following SQL query was used to verify the final processing status:
+
+`SELECT processing_status, COUNT(*) FROM images GROUP BY processing_status;`
+
+Observed result:
+
+`completed | 50`
+
+### Metadata Verification
+
+The following query was used to verify that metadata was created for all images:
+
+`SELECT COUNT(*) FROM image_metadata;`
+
+Observed result:
+
+`50`
+
+### AI Usage Verification
+
+Vision usage records can be checked using:
+
+`SELECT COUNT(*) FROM ai_cost_logs WHERE operation = 'vision_analysis';`
+
+The worker processed pending images automatically, tracked progress, retried failed processing attempts when necessary, and persisted the generated image metadata.
+
+The completed flow is:
+
+Queued Job -> Background Worker -> Image Analysis -> Pydantic Validation -> Metadata Persistence -> AI Usage Logging -> Job Completion
