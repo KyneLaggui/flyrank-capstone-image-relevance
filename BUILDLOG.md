@@ -24,3 +24,13 @@
 - Configured Alembic to use the application's environment-based database configuration.
 - Generated and applied the first database migration.
 - Verified both migration upgrade and downgrade behavior.
+
+## Stage 2B — Image and Post APIs
+
+- Added Pydantic request and response schemas for images and posts.
+- Added database-backed endpoints for creating and retrieving images.
+- Added database-backed endpoints for creating and retrieving posts.
+- Added duplicate filename handling using HTTP 409.
+- Added clean HTTP 404 responses for missing resources.
+- Verified Pydantic validation returns HTTP 422 for invalid input.
+- Verified records survive FastAPI and PostgreSQL container restarts.
