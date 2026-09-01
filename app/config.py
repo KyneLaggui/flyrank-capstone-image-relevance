@@ -14,6 +14,8 @@ class Settings(BaseSettings):
     ollama_host: str = "http://localhost:11434"
     ollama_model: str = "gemma3:4b"
 
+    embedding_model: str = "all-minilm"
+
     gemini_api_key: str | None = None
     gemini_model: str = "gemini-3.7-flash"
 

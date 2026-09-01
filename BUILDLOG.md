@@ -90,3 +90,16 @@ Final result:
 - 50 image metadata records created
 - Vision usage logs recorded
 - No remaining pending images
+
+## Stage 5A - Embedding Foundation
+
+Implemented the initial semantic embedding pipeline using the local Ollama `all-minilm` model.
+
+- Added an `embeddings` database table for image and post vectors.
+- Added local text embedding generation through Ollama.
+- Added semantic text construction from image metadata and post content.
+- Added content hashing to avoid regenerating unchanged embeddings.
+- Added AI usage logging for embedding generation.
+- Successfully generated and stored an embedding for `fox_01.jpg`.
+- Successfully generated and stored an embedding for the red fox test post.
+- Verified that repeated processing does not create duplicate embeddings or usage logs.

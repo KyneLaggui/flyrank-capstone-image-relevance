@@ -128,3 +128,19 @@ The worker processed pending images automatically, tracked progress, retried fai
 The completed flow is:
 
 Queued Job -> Background Worker -> Image Analysis -> Pydantic Validation -> Metadata Persistence -> AI Usage Logging -> Job Completion
+
+## Stage 5A - Embedding Foundation
+
+Successfully generated semantic embeddings using the local Ollama `all-minilm` model.
+
+Verified:
+
+- One image embedding was created.
+- One post embedding was created.
+- Both embeddings use the same model and vector dimensions.
+- Embedding usage was recorded in `ai_cost_logs`.
+- Re-running the embedding process did not create duplicate records.
+
+The image embedding is generated from its AI-produced subject, category, attributes, and caption.
+
+The post embedding is generated from its title and content.
