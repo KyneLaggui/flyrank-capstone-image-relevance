@@ -185,3 +185,35 @@ The ranking endpoint is:
 `GET /posts/{post_id}/rank-images`
 
 This stage returns raw semantic ranking only. No candidate is accepted or rejected yet.
+
+## Stage 5D - Mismatch Guard
+
+The mismatch guard successfully validates ranked image candidates using confidence, subject compatibility, and semantic similarity.
+
+Verified successful match:
+
+- Post subject: `fox`
+- Image subject: `fox`
+- Image: `fox_01.jpg`
+- Similarity: approximately `0.597`
+- Confidence: `0.98`
+- Result: accepted
+
+The development similarity threshold is currently:
+
+`0.55`
+
+The vision confidence threshold remains:
+
+`0.70`
+
+A forced wolf candidate was also tested against the fox post.
+
+Verified mismatch behavior:
+
+- Post subject: `fox`
+- Image subject: `wolf`
+- Result: rejected
+- Reason: subject/category mismatch
+
+The guard now prevents a semantically related but incorrect animal from being accepted as the final image recommendation.

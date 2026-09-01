@@ -139,3 +139,42 @@ def rank_images_for_post(
     )
 
     return ranked_images[:limit]
+
+
+def get_similarity_for_candidate(
+    db: Session,
+    post: Post,
+    image: Image,
+) -> float:
+    post_embedding = db.scalar(
+        select(Embedding).where(
+            Embedding.resource_type == "post",
+            Embedding.resource_id == post.id,
+            Embedding.model_name
+            == settings.embedding_model,
+        )
+    )
+
+    if post_embedding is None:
+        raise ValueError(
+            "Post does not have an embedding."
+        )
+
+    image_embedding = db.scalar(
+        select(Embedding).where(
+            Embedding.resource_type == "image",
+            Embedding.resource_id == image.id,
+            Embedding.model_name
+            == settings.embedding_model,
+        )
+    )
+
+    if image_embedding is None:
+        raise ValueError(
+            "Image does not have an embedding."
+        )
+
+    return cosine_similarity(
+        post_embedding.vector,
+        image_embedding.vector,
+    )

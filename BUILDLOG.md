@@ -137,3 +137,23 @@ Implemented semantic image ranking using cosine similarity.
 - Successfully tested ranking using the red fox post against the complete image dataset.
 
 This stage provides raw semantic ranking only. Acceptance and rejection rules will be added separately in the mismatch guard.
+
+## Stage 5D - Mismatch Guard
+
+Implemented the mismatch guard for validating ranked image candidates.
+
+- Added image confidence validation.
+- Added subject normalization for fox, wolf, dog, bear, and deer.
+- Added semantic similarity threshold checking.
+- Added subject compatibility checking between posts and images.
+- Added human-readable rejection reasons.
+- Added an endpoint for testing a specific image against a post.
+- Set the temporary development similarity threshold to `0.55` after testing a valid fox-to-fox match.
+- Kept the vision confidence threshold separate at `0.70`.
+
+Verified behavior:
+
+- Fox post + fox image -> accepted
+- Fox post + wolf image -> rejected because of subject mismatch
+
+The similarity threshold is temporary and will be tuned later using the labeled evaluation dataset.
