@@ -9,20 +9,28 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.db import get_db
-from app.models.post import Post
-from app.schemas.post import PostCreate, PostResponse
-
-from app.schemas.matching import ImageRankingResponse
-from app.services.matching import rank_images_for_post
 
 from app.models.image import Image
+from app.models.post import Post
+
 from app.schemas.guard import GuardCheckResponse
+from app.schemas.matching import ImageRankingResponse
+from app.schemas.post import PostCreate, PostResponse
+from app.schemas.recommendation import (
+    PostImageRecommendationResponse,
+)
+
 from app.services.matching import (
     get_similarity_for_candidate,
+    rank_images_for_post,
 )
 from app.services.mismatch_guard import (
     evaluate_candidate,
 )
+from app.services.recommendation import (
+    recommend_images_for_post,
+)
+
 
 router = APIRouter(
     prefix="/posts",
@@ -39,6 +47,19 @@ def create_post(
     payload: PostCreate,
     db: Session = Depends(get_db),
 ):
+    existing_post = db.scalar(
+        select(Post).where(
+            Post.title == payload.title,
+            Post.content == payload.content,
+        )
+    )
+
+    if existing_post is not None:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="An identical post already exists.",
+        )
+
     post = Post(
         title=payload.title,
         content=payload.content,
@@ -73,7 +94,10 @@ def get_post(
     post_id: int,
     db: Session = Depends(get_db),
 ):
-    post = db.get(Post, post_id)
+    post = db.get(
+        Post,
+        post_id,
+    )
 
     if post is None:
         raise HTTPException(
@@ -196,4 +220,54 @@ def check_image_candidate(
             if metadata
             else None
         ),
+    }
+
+
+@router.get(
+    "/{post_id}/images",
+    response_model=PostImageRecommendationResponse,
+)
+def recommend_images(
+    post_id: int,
+    top_k: int = Query(
+        default=10,
+        ge=1,
+        le=50,
+    ),
+    db: Session = Depends(get_db),
+):
+    post = db.get(
+        Post,
+        post_id,
+    )
+
+    if post is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Post not found.",
+        )
+
+    try:
+        result = recommend_images_for_post(
+            db=db,
+            post=post,
+            response_limit=top_k,
+        )
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=str(error),
+        ) from error
+
+    return {
+        "post_id": post.id,
+        "post_title": post.title,
+        "match_found": result.match_found,
+        "message": result.message,
+        "recommendation": (
+            result.recommendation
+        ),
+        "reasons": result.reasons,
+        "candidates": result.candidates,
     }

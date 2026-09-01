@@ -217,3 +217,38 @@ Verified mismatch behavior:
 - Reason: subject/category mismatch
 
 The guard now prevents a semantically related but incorrect animal from being accepted as the final image recommendation.
+
+## Stage 5E - Final Image Recommendation
+
+The final recommendation endpoint successfully combines semantic ranking and mismatch validation.
+
+Endpoint:
+
+`GET /posts/{post_id}/images`
+
+Verified fox behavior:
+
+- A red fox post returned a fox image.
+- `match_found` was `true`.
+- The recommended candidate passed the confidence, similarity, and subject compatibility checks.
+
+Verified no-match behavior:
+
+- A lion post was created while the image corpus contained no lion images.
+- `match_found` was `false`.
+- The response returned `No confident match`.
+- `recommendation` was `null`.
+- Rejection reasons were included.
+
+The system therefore does not automatically select the nearest embedding when the available candidates are not appropriate.
+
+## Post Duplicate Protection
+
+Verified that identical duplicate posts are rejected by the API.
+
+Behavior:
+
+- First identical post submission -> `201 Created`
+- Second identical post submission -> `409 Conflict`
+
+Duplicate detection checks both the post title and content before creating a new record.

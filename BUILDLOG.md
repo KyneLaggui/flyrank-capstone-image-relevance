@@ -157,3 +157,30 @@ Verified behavior:
 - Fox post + wolf image -> rejected because of subject mismatch
 
 The similarity threshold is temporary and will be tuned later using the labeled evaluation dataset.
+
+## Stage 5E - Final Image Recommendation
+
+Implemented the final image recommendation flow by combining semantic ranking with the mismatch guard.
+
+- Added a recommendation service that evaluates ranked image candidates.
+- Added a final endpoint for retrieving safe image recommendations for a post.
+- Candidates are checked using image confidence, subject compatibility, and semantic similarity.
+- The system skips rejected candidates instead of automatically trusting the highest similarity score.
+- Added support for returning `No confident match` when no image passes the guard.
+- Added human-readable rejection reasons for unsuccessful candidates.
+
+Verified behavior:
+
+- Red fox post -> returns an accepted fox image.
+- Lion post with no lion images -> returns `No confident match`.
+- Incorrect candidates are rejected instead of being returned as recommendations.
+
+This completed the core matching engine.
+
+## Post Duplicate Protection
+
+Added duplicate protection to the post creation endpoint.
+
+- The API now checks for an existing post with the same title and content.
+- Identical duplicate posts return `409 Conflict` instead of creating another record.
+- Existing duplicate test data was cleaned up manually from PostgreSQL.

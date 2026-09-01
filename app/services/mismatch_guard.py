@@ -31,6 +31,11 @@ SUBJECT_ALIASES = {
         "deer",
         "cervid",
     ),
+    "lion": (
+        "african lion",
+        "panthera leo",
+        "lion",
+    ),
 }
 
 
@@ -125,6 +130,28 @@ def evaluate_candidate(
     image_subject = infer_image_subject(
         image
     )
+
+    if post_subject is None:
+        return GuardDecision(
+            accepted=False,
+            reason=(
+                "Rejected because the post subject "
+                "could not be identified."
+            ),
+            post_subject=None,
+            image_subject=image_subject,
+        )
+
+    if image_subject is None:
+        return GuardDecision(
+            accepted=False,
+            reason=(
+                "Rejected because the image subject "
+                "could not be identified."
+            ),
+            post_subject=post_subject,
+            image_subject=None,
+        )
 
     if (
         metadata.confidence
