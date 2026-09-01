@@ -43,3 +43,12 @@
 - Added an AI cost log model for per-call usage and cost attribution.
 - Added endpoints for creating and inspecting image-processing jobs.
 - Kept job execution separate from job creation so the future worker can support retries, progress, and failures.
+
+## Stage 3 — Image Dataset
+
+- Collected approximately 50 images across red fox, wolf, dog, bear, and deer categories.
+- Recorded image provenance and human ground-truth labels in `images_manifest.json`.
+- Kept human labels separate from the AI runtime pipeline to avoid leaking answers into image classification.
+- Normalized image dimensions and JPEG size to keep the corpus inexpensive and reproducible.
+- Added an idempotent seed script for registering image records in PostgreSQL.
+- Verified that all seeded images begin with `pending` processing status.

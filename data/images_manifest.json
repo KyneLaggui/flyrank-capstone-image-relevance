@@ -1,0 +1,356 @@
+[
+  {
+    "filename": "fox_01.jpg",
+    "expected_subject": "red fox",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/red-fox-Y9mp8VnyreQ"
+  },
+  {
+    "filename": "fox_02.jpg",
+    "expected_subject": "red fox",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/closeup-photography-of-red-fox-sitting-on-ground-surrounded-by-grass-Vt0tkNf6r5Y"
+  },
+  {
+    "filename": "fox_03.jpg",
+    "expected_subject": "red fox",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/red-fox-js9VvADk3-0"
+  },
+  {
+    "filename": "fox_04.jpg",
+    "expected_subject": "red fox",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-red-fox-explores-the-dark-forest-BLwBQcuw2VA"
+  },
+  {
+    "filename": "fox_05.jpg",
+    "expected_subject": "red fox",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/red-fox-Yu-qayee34c"
+  },
+  {
+    "filename": "fox_06.jpg",
+    "expected_subject": "red fox",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-red-fox-running-through-the-grass-towards-the-camera-jRPm7HncWGk"
+  },
+  {
+    "filename": "fox_07.jpg",
+    "expected_subject": "red fox",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-red-fox-is-sitting-elegantly-in-the-snow-i3ZG5daXmBQ"
+  },
+  {
+    "filename": "fox_08.jpg",
+    "expected_subject": "red fox",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-red-fox-laying-on-top-of-a-lush-green-field-tdmxCiPjJQs"
+  },
+  {
+    "filename": "fox_09.jpg",
+    "expected_subject": "red fox",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-red-fox-running-through-the-grass-in-the-woods-MHIqwgTa5bE"
+  },
+  {
+    "filename": "fox_10.jpg",
+    "expected_subject": "red fox",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/red-fox-1f_ryRjNDTc"
+  },
+
+  {
+    "filename": "wolf_01.jpg",
+    "expected_subject": "gray wolf",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/selective-focus-photography-of-gray-wolf-kR1Aer8c_WI"
+  },
+  {
+    "filename": "wolf_02.jpg",
+    "expected_subject": "gray wolf",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/gray-wolf-photo-kNWE_z9MVnY"
+  },
+  {
+    "filename": "wolf_03.jpg",
+    "expected_subject": "gray wolf",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-gray-wolf-rests-peacefully-on-a-platform-tNvFTJsKb1Y"
+  },
+  {
+    "filename": "wolf_04.jpg",
+    "expected_subject": "gray wolf",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-gray-wolf-howling-in-a-forest-of-brown-leaves-IN1s_pMHV8s"
+  },
+  {
+    "filename": "wolf_05.jpg",
+    "expected_subject": "gray wolf",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/gray-wolf-on-snow-covered-ground-ZZhlmDHiQTQ"
+  },
+  {
+    "filename": "wolf_06.jpg",
+    "expected_subject": "gray wolf",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/photo-of-standing-gray-wolf-1LH7Xrae_-Y"
+  },
+  {
+    "filename": "wolf_07.jpg",
+    "expected_subject": "gray wolf",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-gray-wolf-in-a-rocky-mossy-environment-iHC-vZQTzV0"
+  },
+  {
+    "filename": "wolf_08.jpg",
+    "expected_subject": "gray wolf",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-wolf-looking-at-the-camera-w6gKvJlyZDU"
+  },
+  {
+    "filename": "wolf_09.jpg",
+    "expected_subject": "gray wolf",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-wolf-standing-in-the-woods--HV4_fXlQTc"
+  },
+  {
+    "filename": "wolf_10.jpg",
+    "expected_subject": "gray wolf",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-wolf-looking-at-the-camera-mk2chAKaZR4"
+  },
+
+  {
+    "filename": "dog_01.jpg",
+    "expected_subject": "dog",
+    "category": "animal",
+    "source": "Pexels",
+    "source_url": "https://www.pexels.com/photo/photo-of-a-dog-11567666/"
+  },
+  {
+    "filename": "dog_02.jpg",
+    "expected_subject": "dog",
+    "category": "animal",
+    "source": "Pexels",
+    "source_url": "https://www.pexels.com/photo/dog-28176029/"
+  },
+  {
+    "filename": "dog_03.jpg",
+    "expected_subject": "dog",
+    "category": "animal",
+    "source": "Pexels",
+    "source_url": "https://www.pexels.com/photo/dog-close-up-17307607/"
+  },
+  {
+    "filename": "dog_04.jpg",
+    "expected_subject": "dog",
+    "category": "animal",
+    "source": "Pexels",
+    "source_url": "https://www.pexels.com/photo/close-up-of-dog-12717144/"
+  },
+  {
+    "filename": "dog_05.jpg",
+    "expected_subject": "dog",
+    "category": "animal",
+    "source": "Pexels",
+    "source_url": "https://www.pexels.com/photo/dog-on-white-background-17975869/"
+  },
+  {
+    "filename": "dog_06.jpg",
+    "expected_subject": "dog",
+    "category": "animal",
+    "source": "Pexels",
+    "source_url": "https://www.pexels.com/photo/close-up-shot-of-a-dog-6749936/"
+  },
+  {
+    "filename": "dog_07.jpg",
+    "expected_subject": "dog",
+    "category": "animal",
+    "source": "Pexels",
+    "source_url": "https://www.pexels.com/photo/close-up-of-dog-16445649/"
+  },
+  {
+    "filename": "dog_08.jpg",
+    "expected_subject": "dog",
+    "category": "animal",
+    "source": "Pexels",
+    "source_url": "https://www.pexels.com/photo/a-dog-on-the-grass-13354630/"
+  },
+  {
+    "filename": "dog_09.jpg",
+    "expected_subject": "dog",
+    "category": "animal",
+    "source": "Pexels",
+    "source_url": "https://www.pexels.com/photo/puppy-dog-on-pavement-19874288/"
+  },
+  {
+    "filename": "dog_10.jpg",
+    "expected_subject": "dog",
+    "category": "animal",
+    "source": "Pexels",
+    "source_url": "https://www.pexels.com/photo/puppy-on-grass-16202421/"
+  },
+
+  {
+    "filename": "bear_01.jpg",
+    "expected_subject": "brown bear",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-brown-bear-sits-in-shallow-water-Cfu9oAycDbE"
+  },
+  {
+    "filename": "bear_02.jpg",
+    "expected_subject": "brown bear",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-brown-bear-stands-on-a-rock-in-golden-light-KtNIIVUZrnE"
+  },
+  {
+    "filename": "bear_03.jpg",
+    "expected_subject": "brown bear",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/aRXPJnXQ9lU"
+  },
+  {
+    "filename": "bear_04.jpg",
+    "expected_subject": "brown bear",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-brown-bear-stands-in-shallow-water-rqOBsnCBcoU"
+  },
+  {
+    "filename": "bear_05.jpg",
+    "expected_subject": "brown bear",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/brown-bear-zk7GoKZbBL8"
+  },
+  {
+    "filename": "bear_06.jpg",
+    "expected_subject": "brown bear",
+    "category": "animal",
+    "source": "Pexels",
+    "source_url": "https://www.pexels.com/photo/brown-bear-35435/"
+  },
+  {
+    "filename": "bear_07.jpg",
+    "expected_subject": "brown bear",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/brown-bear-on-snow-covered-ground-during-daytime-V6zbDVjKSK0"
+  },
+  {
+    "filename": "bear_08.jpg",
+    "expected_subject": "brown bear",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/brown-bear-sitting-on-grass-field-y421kXlUOQk"
+  },
+  {
+    "filename": "bear_09.jpg",
+    "expected_subject": "brown bear",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-large-brown-bear-stands-in-dry-grass-8yzx5Xv0GvA"
+  },
+  {
+    "filename": "bear_10.jpg",
+    "expected_subject": "brown bear",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-brown-bear-stands-next-to-a-river-HayA_RVpyuQ"
+  },
+
+  {
+    "filename": "deer_01.jpg",
+    "expected_subject": "deer",
+    "category": "animal",
+    "source": "Pexels",
+    "source_url": "https://www.pexels.com/photo/deer-in-nature-18290779/"
+  },
+  {
+    "filename": "deer_02.jpg",
+    "expected_subject": "deer",
+    "category": "animal",
+    "source": "Pexels",
+    "source_url": "https://www.pexels.com/photo/deer-in-the-forest-13925699/"
+  },
+  {
+    "filename": "deer_03.jpg",
+    "expected_subject": "deer",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/selective-focus-photography-of-brown-deer-standing-on-green-grass-field-during-daytime-K_Na5gCmh38"
+  },
+  {
+    "filename": "deer_04.jpg",
+    "expected_subject": "deer",
+    "category": "animal",
+    "source": "Pexels",
+    "source_url": "https://www.pexels.com/photo/deer-in-nature-19590669/"
+  },
+  {
+    "filename": "deer_05.jpg",
+    "expected_subject": "deer",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-deer-standing-in-a-field-with-trees-in-the-background-xBFdIt_Mtj4"
+  },
+  {
+    "filename": "deer_06.jpg",
+    "expected_subject": "deer",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-deer-stands-gracefully-in-an-open-field-xbQF1_7iUNQ"
+  },
+  {
+    "filename": "deer_07.jpg",
+    "expected_subject": "deer",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-deer-standing-in-the-middle-of-a-forest-d16flhlWufM"
+  },
+  {
+    "filename": "deer_08.jpg",
+    "expected_subject": "deer",
+    "category": "animal",
+    "source": "Pexels",
+    "source_url": "https://www.pexels.com/photo/deer-in-a-forest-10118850/"
+  },
+  {
+    "filename": "deer_09.jpg",
+    "expected_subject": "deer",
+    "category": "animal",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/a-deer-standing-next-to-a-tree-filled-forest-wvPv3gMWWoc"
+  },
+  {
+    "filename": "deer_10.jpg",
+    "expected_subject": "deer",
+    "category": "animal",
+    "source": "Pexels",
+    "source_url": "https://www.pexels.com/photo/deer-in-the-forest-9870287/"
+  }
+]

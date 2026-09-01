@@ -1,0 +1,12 @@
+[
+  {
+    "title": "The Behavior of Red Foxes",
+    "content": "Red foxes are adaptable canids commonly found in forests and grasslands.",
+    "expected_image": "fox_01.jpg"
+  },
+  {
+    "title": "Gray Wolf Pack Behavior",
+    "content": "Gray wolves are social predators that often live and hunt in packs.",
+    "expected_image": "wolf_01.jpg"
+  }
+]

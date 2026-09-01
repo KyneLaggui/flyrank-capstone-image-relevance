@@ -35,3 +35,26 @@ The same job could be retrieved afterward through:
 `GET /jobs/{job_id}`
 
 This confirms that processing jobs are stored persistently rather than existing only inside the HTTP request.
+
+## Image Dataset
+
+The project contains approximately 50 images across five subject categories:
+
+- red fox
+- wolf
+- dog
+- bear
+- deer
+
+The image seed script was run twice.
+
+First run:
+
+- images inserted successfully
+
+Second run:
+
+- existing images were skipped
+- no duplicate database records were created
+
+This confirms the dataset can be seeded repeatedly without creating duplicate image records.
