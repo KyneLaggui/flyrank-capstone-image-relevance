@@ -166,3 +166,22 @@ The embedding generation job completed successfully with:
 - Failed items: 0
 
 All image and post embeddings are stored in PostgreSQL and use the same embedding model and vector dimensions.
+
+## Stage 5C - Semantic Similarity Ranking
+
+Successfully implemented semantic ranking between blog posts and images.
+
+Verified behavior:
+
+- Post embeddings are compared against all 50 image embeddings.
+- Cosine similarity is calculated for each image.
+- Results are sorted from highest to lowest similarity.
+- Ranked image results include the image filename, detected subject, category, and similarity score.
+- The red fox test post successfully returned ranked image recommendations from the complete image dataset.
+- The cosine similarity implementation was verified with known vector examples.
+
+The ranking endpoint is:
+
+`GET /posts/{post_id}/rank-images`
+
+This stage returns raw semantic ranking only. No candidate is accepted or rejected yet.

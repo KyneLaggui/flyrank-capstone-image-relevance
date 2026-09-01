@@ -123,3 +123,17 @@ Final result:
 - All embeddings have 384 dimensions
 - 53 embedding usage logs recorded
 - 0 failed items
+
+## Stage 5C - Semantic Similarity Ranking
+
+Implemented semantic image ranking using cosine similarity.
+
+- Added cosine similarity calculation for stored embedding vectors.
+- Added ranking logic that compares a post embedding against all image embeddings.
+- Added sorting from highest to lowest semantic similarity.
+- Added an API endpoint for retrieving ranked image suggestions for a post.
+- Added validation for missing embeddings and incompatible vector dimensions.
+- Verified the cosine similarity implementation using identical, unrelated, and opposite vectors.
+- Successfully tested ranking using the red fox post against the complete image dataset.
+
+This stage provides raw semantic ranking only. Acceptance and rejection rules will be added separately in the mismatch guard.
