@@ -25,3 +25,22 @@ class ImageResponse(BaseModel):
     model_config = ConfigDict(
         from_attributes=True,
     )
+
+
+class ImageMetadataResponse(BaseModel):
+    subject: str
+    category: str
+    attributes: list[str]
+    caption: str
+    confidence: float
+    flagged: bool
+
+    model_config = ConfigDict(
+        from_attributes=True,
+    )
+
+
+class ImageAnalysisResponse(BaseModel):
+    image_id: int
+    processing_status: str
+    metadata: ImageMetadataResponse

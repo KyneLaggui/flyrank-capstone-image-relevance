@@ -58,3 +58,29 @@ Second run:
 - no duplicate database records were created
 
 This confirms the dataset can be seeded repeatedly without creating duplicate image records.
+
+## Stage 4A - Single Image Analysis
+
+Successfully analyzed `fox_01.jpg` using the local Ollama `gemma3:4b` vision model.
+
+Test endpoint:
+
+`POST /images/1/analyze`
+
+Observed result:
+
+- Subject: `fox`
+- Category: `mammal`
+- Confidence: `0.98`
+- Flagged: `false`
+- Processing Status: `completed`
+
+The response also included structured attributes and a generated caption.
+
+The result was successfully saved in the `image_metadata` table.
+
+Vision model usage was also recorded in the `ai_cost_logs` table. Since Ollama runs locally, the external API cost is recorded as `$0`.
+
+The image completed the following flow successfully:
+
+Image -> Vision Model -> Pydantic Validation -> Confidence Check -> Database -> Completed

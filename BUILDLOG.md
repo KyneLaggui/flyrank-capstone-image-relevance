@@ -52,3 +52,20 @@
 - Normalized image dimensions and JPEG size to keep the corpus inexpensive and reproducible.
 - Added an idempotent seed script for registering image records in PostgreSQL.
 - Verified that all seeded images begin with `pending` processing status.
+
+## Stage 4A - Single Image Analysis
+
+Implemented the first working image analysis flow using a local Ollama vision model.
+
+- Added structured image analysis with subject, category, attributes, caption, and confidence.
+- Added Pydantic validation for the model output.
+- Added confidence-based flagging for low-confidence results.
+- Added database persistence for generated image metadata.
+- Added AI usage logging in `ai_cost_logs`.
+- Added `POST /images/{image_id}/analyze` for testing individual images.
+- Added protection against reprocessing already completed images.
+- Added error handling using processing status, attempt count, and `last_error`.
+
+Initially tested Gemini for image analysis, but the free-tier request quota was reached. Switched the vision provider to local Ollama using `gemma3:4b` so the dataset can be processed without depending on an external API quota.
+
+Successfully tested the pipeline using `fox_01.jpg`. The model identified the subject as `fox` with a confidence score of `0.98`, and the result was successfully saved to PostgreSQL.
