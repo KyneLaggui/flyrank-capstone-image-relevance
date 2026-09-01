@@ -7,7 +7,13 @@ from alembic import context
 
 from app.config import settings
 from app.db import Base
-from app.models import Image, ImageMetadata, Post
+from app.models import (
+    AICostLog,
+    Image,
+    ImageMetadata,
+    ProcessingJob,
+    Post,
+)
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

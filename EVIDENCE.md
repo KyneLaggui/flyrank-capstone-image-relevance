@@ -21,3 +21,17 @@ Requesting a nonexistent image through `GET /images/9999` returns HTTP 404 with:
 Submitting the same filename twice returns HTTP 409 with:
 
 `An image with this filename already exists.`
+
+## Background Job Persistence
+
+Created an image-processing job through:
+
+`POST /jobs/image-processing`
+
+The endpoint returned HTTP 201 with a persistent queued job containing the total number of pending images.
+
+The same job could be retrieved afterward through:
+
+`GET /jobs/{job_id}`
+
+This confirms that processing jobs are stored persistently rather than existing only inside the HTTP request.

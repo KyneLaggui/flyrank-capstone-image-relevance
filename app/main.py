@@ -5,6 +5,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from app.api.images import router as images_router
 from app.api.posts import router as posts_router
 from app.db import engine
+from app.api.jobs import router as jobs_router
 
 
 app = FastAPI(
@@ -15,6 +16,7 @@ app = FastAPI(
 
 app.include_router(images_router)
 app.include_router(posts_router)
+app.include_router(jobs_router)
 
 
 @app.get("/health")

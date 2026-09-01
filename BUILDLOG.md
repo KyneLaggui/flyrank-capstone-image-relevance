@@ -34,3 +34,12 @@
 - Added clean HTTP 404 responses for missing resources.
 - Verified Pydantic validation returns HTTP 422 for invalid input.
 - Verified records survive FastAPI and PostgreSQL container restarts.
+
+## Stage 2C — Background Job and AI Cost Foundation
+
+- Added persistent processing job records for asynchronous image processing.
+- Added progress fields for total, processed, and failed items.
+- Added retry-related fields to image records.
+- Added an AI cost log model for per-call usage and cost attribution.
+- Added endpoints for creating and inspecting image-processing jobs.
+- Kept job execution separate from job creation so the future worker can support retries, progress, and failures.
