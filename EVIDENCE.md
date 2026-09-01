@@ -144,3 +144,25 @@ Verified:
 The image embedding is generated from its AI-produced subject, category, attributes, and caption.
 
 The post embedding is generated from its title and content.
+
+## Stage 5B - Batch Embedding Generation
+
+The background worker successfully generated semantic embeddings for the complete image dataset and all existing posts.
+
+Verified results:
+
+- Image embeddings: 50
+- Post embeddings: 3
+- Total embeddings: 53
+- Embedding model: `all-minilm`
+- Vector dimensions: 384
+- Embedding usage logs: 53
+- Failed job items: 0
+
+The embedding generation job completed successfully with:
+
+- Total items: 53
+- Processed items: 53
+- Failed items: 0
+
+All image and post embeddings are stored in PostgreSQL and use the same embedding model and vector dimensions.

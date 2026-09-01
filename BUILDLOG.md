@@ -103,3 +103,23 @@ Implemented the initial semantic embedding pipeline using the local Ollama `all-
 - Successfully generated and stored an embedding for `fox_01.jpg`.
 - Successfully generated and stored an embedding for the red fox test post.
 - Verified that repeated processing does not create duplicate embeddings or usage logs.
+
+## Stage 5B - Batch Embedding Generation
+
+Implemented background batch generation for semantic embeddings.
+
+- Extended the background worker to support embedding-generation jobs.
+- Generated embeddings for all completed images and existing posts.
+- Reused existing embeddings when the source content had not changed.
+- Added retry handling and progress tracking for embedding generation.
+- Continued recording model usage and local inference cost information in `ai_cost_logs`.
+
+Final result:
+
+- 50 image embeddings
+- 3 post embeddings
+- 53 total embeddings
+- All embeddings use `all-minilm`
+- All embeddings have 384 dimensions
+- 53 embedding usage logs recorded
+- 0 failed items
