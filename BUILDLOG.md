@@ -238,3 +238,32 @@ Implemented an automated evaluation script for measuring image matching accuracy
 - Kept subject/category mismatch validation separate from the semantic similarity threshold to preserve protection against incorrect cross-category matches.
 
 The final threshold was selected from measured evaluation behavior rather than manually choosing a value without evidence.
+
+## Stage 6D - Production Hardening and Tests
+
+Hardened the image matching backend and added focused automated tests for the system's critical behavior.
+
+- Added an AI call budget guard for image-processing and embedding-generation jobs.
+- Centralized the maximum retry count in application configuration so the worker and budget calculation use the same limit.
+- Preserved background-job retries, progress tracking, and durable failure reporting.
+- Added stronger post input validation for empty and oversized content.
+- Added Pytest configuration so automated tests are isolated from manual scripts.
+- Added tests for:
+  - AI call budget enforcement
+  - Structured vision output validation
+  - Confidence bounds and required attributes
+  - Cosine similarity behavior
+  - Vector dimension mismatch handling
+  - Correct fox acceptance
+  - Forced wolf rejection
+  - Low-confidence image rejection
+- Automated test suite completed successfully with 13 passing tests.
+- Added degraded-image robustness fixtures to verify low-confidence handling.
+- The first ambiguous fixture exposed model overconfidence, which led to clearer confidence-calibration instructions in the vision prompt.
+- A second degraded image produced a confidence score of `0.60` and was correctly flagged because it fell below the `0.70` vision confidence threshold.
+- Verified all image records have corresponding processed metadata.
+- Verified AI calls are attributed in the cost log for both vision analysis and embedding generation.
+- Verified clean API errors for invalid input, missing resources, duplicate operations, and repeated review decisions.
+- Re-ran the required matching safety scenarios successfully.
+
+Stage 6D confirms that unsafe or uncertain AI output is rejected or flagged rather than silently trusted.

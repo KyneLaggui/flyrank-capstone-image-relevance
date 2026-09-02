@@ -328,3 +328,83 @@ The evaluation result is stored in:
 `data/eval_results.json`
 
 The labeled evaluation set remains unchanged during threshold tuning so the measured result reflects the system's behavior rather than modified ground truth.
+
+## Stage 6D - Production Hardening and Safety Verification
+
+### Automated Tests
+
+The focused test suite completed successfully:
+
+`13 passed`
+
+Coverage includes:
+
+- AI call budget calculations and rejection when a job exceeds its configured limit.
+- Structured vision schema validation.
+- Rejection of confidence values outside the valid range.
+- Rejection of empty image attribute lists.
+- Cosine similarity for identical, orthogonal, and opposite vectors.
+- Rejection of vectors with incompatible dimensions.
+- Acceptance of a valid fox image for a fox post.
+- Rejection of a wolf candidate for a fox post even when semantic similarity is high.
+- Rejection of low-confidence image classifications.
+
+### Image Processing Coverage
+
+All original corpus images were successfully processed and stored with structured metadata.
+
+- Original images processed: `50`
+- Original metadata records: `50`
+
+### Low-Confidence Safety Probe
+
+A deliberately degraded image was processed through the real vision pipeline to verify uncertainty handling.
+
+Observed result:
+
+- File: `ambiguous_02.jpg`
+- Detected subject: `human`
+- Detected category: `person`
+- Confidence: `0.60`
+- Flagged: `true`
+
+The incorrect subject classification was not silently trusted because the confidence score fell below the configured `0.70` confidence threshold.
+
+This verifies that low-confidence AI output is flagged for review rather than automatically accepted.
+
+### AI Cost Attribution
+
+Cost logs were verified for both AI operations:
+
+- Vision analysis using `gemma3:4b`
+- Embedding generation using `all-minilm`
+
+Both models run locally through Ollama, so the external monetary cost is `$0`, while each AI call remains attributed and recorded.
+
+### API Boundary Validation
+
+Verified clean HTTP error behavior:
+
+- Invalid empty post input -> `422`
+- Missing resource -> `404`
+- Duplicate post creation -> `409`
+- Repeated suggestion review -> `409`
+
+No unexpected server error is required for these expected failure cases.
+
+### Matching Safety Probes
+
+Verified:
+
+- A red fox post returns a valid fox recommendation.
+- A forced wolf candidate for a fox post is rejected with a mismatch explanation.
+- A lion post with no suitable image returns `No confident match`.
+- The calibrated evaluation pipeline continues to report the measured Top-1 Precision from Stage 6C.
+
+### Budget Guard
+
+AI batch jobs now estimate their maximum possible model calls using:
+
+`total items × maximum retry attempts`
+
+Jobs that exceed the configured AI call budget are rejected before processing begins.

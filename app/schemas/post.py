@@ -1,16 +1,21 @@
 from datetime import datetime
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+)
 
 
 class PostCreate(BaseModel):
     title: str = Field(
         min_length=1,
-        max_length=255,
+        max_length=300,
     )
 
     content: str = Field(
         min_length=1,
+        max_length=20000,
     )
 
 

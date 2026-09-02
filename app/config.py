@@ -21,7 +21,10 @@ class Settings(BaseSettings):
 
     vision_confidence_threshold: float = 0.70
 
-    match_similarity_threshold: float = 0.55
+    match_similarity_threshold: float = 0.50
+
+    ai_max_calls_per_job: int = 250
+    ai_max_attempts_per_item: int = 3
 
     gemini_input_price_per_million: Decimal = Decimal("0.75")
     gemini_output_price_per_million: Decimal = Decimal("3.75")

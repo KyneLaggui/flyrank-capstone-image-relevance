@@ -42,13 +42,28 @@ Return:
 - subject: the most specific common name you can confidently identify
 - category: the broad category of the subject
 - attributes: 3 to 8 visible characteristics
-- caption: one factual sentence describing the image
+- caption: one factual sentence describing only what is visibly present
 - confidence: a number from 0 to 1 representing how certain you are
   about the subject identification
 
-Only use visual evidence from the image.
-Do not guess when the image is ambiguous.
-Lower the confidence score when identification is uncertain.
+Use only visual evidence from the image.
+
+Confidence rules:
+- 0.90 to 1.00: the subject is clearly visible, detailed, and easy to identify.
+- 0.70 to 0.89: the subject is identifiable, but there is some minor uncertainty.
+- 0.40 to 0.69: the image is blurry, dark, cropped, obstructed, low-detail,
+  or the subject could reasonably be confused with another subject.
+- 0.00 to 0.39: the subject cannot be reliably identified.
+
+Important:
+- Do not choose the closest-looking subject when the evidence is weak.
+- If the image is severely blurry, dark, cropped, obstructed, or lacks enough
+  detail for reliable identification, lower the confidence below 0.70.
+- If the subject cannot be identified reliably, use "unknown" as the subject.
+- If the subject is unknown, use "unknown" as the category when appropriate.
+- Confidence must reflect identification certainty, not simply whether an
+  object appears to be present.
+- Never increase confidence just to provide a definite answer.
 
 Return the result as JSON matching the required schema.
 """

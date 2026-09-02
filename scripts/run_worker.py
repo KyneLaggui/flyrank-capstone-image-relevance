@@ -13,10 +13,13 @@ from app.services.embedding_processing import (
     embed_post,
 )
 from app.services.image_processing import process_image
+from app.config import settings
 
 
 POLL_INTERVAL_SECONDS = 2
-MAX_RETRIES = 3
+MAX_RETRIES = (
+    settings.ai_max_attempts_per_item
+)
 
 
 def get_next_job(

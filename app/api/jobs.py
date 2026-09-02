@@ -1,12 +1,23 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import (
+    APIRouter,
+    Depends,
+    HTTPException,
+    status,
+)
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
+from app.config import settings
 from app.db import get_db
 from app.models.image import Image
 from app.models.job import ProcessingJob
-from app.schemas.job import ProcessingJobResponse
 from app.models.post import Post
+from app.schemas.job import (
+    ProcessingJobResponse,
+)
+from app.services.ai_budget import (
+    enforce_ai_call_budget,
+)
 
 
 router = APIRouter(
@@ -25,7 +36,8 @@ def create_image_processing_job(
 ):
     active_job = db.scalar(
         select(ProcessingJob).where(
-            ProcessingJob.job_type == "image_processing",
+            ProcessingJob.job_type
+            == "image_processing",
             ProcessingJob.status.in_(
                 ["queued", "processing"]
             ),
@@ -35,20 +47,49 @@ def create_image_processing_job(
     if active_job is not None:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
-            detail="An image processing job is already active.",
+            detail=(
+                "An image processing job "
+                "is already active."
+            ),
         )
 
-    pending_count = db.scalar(
-        select(func.count(Image.id)).where(
-            Image.processing_status == "pending"
+    pending_count = (
+        db.scalar(
+            select(
+                func.count(Image.id)
+            ).where(
+                Image.processing_status
+                == "pending"
+            )
         )
+        or 0
     )
 
-    if not pending_count:
+    if pending_count == 0:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
-            detail="There are no pending images to process.",
+            detail=(
+                "There are no pending images "
+                "to process."
+            ),
         )
+
+    try:
+        enforce_ai_call_budget(
+            total_items=pending_count,
+            max_attempts=(
+                settings.ai_max_attempts_per_item
+            ),
+            max_calls=(
+                settings.ai_max_calls_per_job
+            ),
+        )
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=str(error),
+        ) from error
 
     job = ProcessingJob(
         job_type="image_processing",
@@ -75,7 +116,8 @@ def create_embedding_generation_job(
 ):
     active_job = db.scalar(
         select(ProcessingJob).where(
-            ProcessingJob.job_type == "embedding_generation",
+            ProcessingJob.job_type
+            == "embedding_generation",
             ProcessingJob.status.in_(
                 ["queued", "processing"]
             ),
@@ -85,26 +127,62 @@ def create_embedding_generation_job(
     if active_job is not None:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
-            detail="An embedding generation job is already active.",
+            detail=(
+                "An embedding generation job "
+                "is already active."
+            ),
         )
 
-    image_count = db.scalar(
-        select(func.count(Image.id)).where(
-            Image.processing_status == "completed"
+    image_count = (
+        db.scalar(
+            select(
+                func.count(Image.id)
+            ).where(
+                Image.processing_status
+                == "completed"
+            )
         )
-    ) or 0
+        or 0
+    )
 
-    post_count = db.scalar(
-        select(func.count(Post.id))
-    ) or 0
+    post_count = (
+        db.scalar(
+            select(
+                func.count(Post.id)
+            )
+        )
+        or 0
+    )
 
-    total_items = image_count + post_count
+    total_items = (
+        image_count + post_count
+    )
 
     if total_items == 0:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
-            detail="There are no resources to embed.",
+            detail=(
+                "There are no resources "
+                "to embed."
+            ),
         )
+
+    try:
+        enforce_ai_call_budget(
+            total_items=total_items,
+            max_attempts=(
+                settings.ai_max_attempts_per_item
+            ),
+            max_calls=(
+                settings.ai_max_calls_per_job
+            ),
+        )
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=str(error),
+        ) from error
 
     job = ProcessingJob(
         job_type="embedding_generation",
@@ -129,7 +207,10 @@ def get_job(
     job_id: int,
     db: Session = Depends(get_db),
 ):
-    job = db.get(ProcessingJob, job_id)
+    job = db.get(
+        ProcessingJob,
+        job_id,
+    )
 
     if job is None:
         raise HTTPException(
