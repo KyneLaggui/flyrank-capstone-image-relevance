@@ -1,12 +1,62 @@
 [
   {
-    "title": "The Behavior of Red Foxes",
-    "content": "Red foxes are adaptable canids commonly found in forests and grasslands.",
-    "expected_image": "fox_01.jpg"
+    "case_id": "fox_eval_01",
+    "title": "A Red Fox Running Through the Grass",
+    "content": "A red fox, also known as Vulpes vulpes, moves quickly through a grassy natural habitat. Its reddish-orange coat, pointed ears, and bushy tail are visible as it runs toward the viewer.",
+    "expected_image": "fox_06.jpg"
   },
   {
-    "title": "Gray Wolf Pack Behavior",
-    "content": "Gray wolves are social predators that often live and hunt in packs.",
-    "expected_image": "wolf_01.jpg"
+    "case_id": "fox_eval_02",
+    "title": "Red Fox Resting in a Snowy Landscape",
+    "content": "A red fox sits calmly in a winter landscape surrounded by snow. The animal has reddish fur, pointed ears, a pale chest, and a thick bushy tail that stands out against the white environment.",
+    "expected_image": "fox_07.jpg"
+  },
+  {
+    "case_id": "wolf_eval_01",
+    "title": "Gray Wolf Howling in an Autumn Forest",
+    "content": "A gray wolf, scientifically known as Canis lupus, raises its head and howls while standing among trees and brown fallen leaves. The scene shows the wolf in a forest during an autumn-like environment.",
+    "expected_image": "wolf_04.jpg"
+  },
+  {
+    "case_id": "wolf_eval_02",
+    "title": "Gray Wolf Standing in the Snow",
+    "content": "A gray wolf stands outdoors on snow-covered ground. Its thick gray coat and alert posture help it blend into the cold winter environment.",
+    "expected_image": "wolf_05.jpg"
+  },
+  {
+    "case_id": "dog_eval_01",
+    "title": "Domestic Dog Against a White Background",
+    "content": "A domestic dog is photographed against a simple white background with few environmental distractions. The image focuses primarily on the dog's appearance and facial features.",
+    "expected_image": "dog_05.jpg"
+  },
+  {
+    "case_id": "dog_eval_02",
+    "title": "Dog Standing Outdoors on Green Grass",
+    "content": "A domestic dog is outdoors in a grassy area. Green grass surrounds the dog while the animal remains the main subject of the scene.",
+    "expected_image": "dog_08.jpg"
+  },
+  {
+    "case_id": "bear_eval_01",
+    "title": "Brown Bear Sitting in Shallow Water",
+    "content": "A large brown bear, or Ursus arctos, sits in shallow water. Its heavy brown fur and large body are clearly visible while water surrounds the animal.",
+    "expected_image": "bear_01.jpg"
+  },
+  {
+    "case_id": "bear_eval_02",
+    "title": "Brown Bear Walking Across Snow",
+    "content": "A brown bear is shown on snow-covered ground in a cold environment. Its dark brown coat contrasts with the pale snowy landscape around it.",
+    "expected_image": "bear_07.jpg"
+  },
+  {
+    "case_id": "deer_eval_01",
+    "title": "Deer Standing Gracefully in an Open Field",
+    "content": "A deer stands in an open field with a clear view of its body and natural surroundings. The wide grassy environment separates the animal from the more enclosed appearance of a forest.",
+    "expected_image": "deer_06.jpg"
+  },
+  {
+    "case_id": "deer_eval_02",
+    "title": "Deer Standing Among Forest Trees",
+    "content": "A deer stands inside a wooded forest surrounded by trees and vegetation. The animal is positioned within the forest rather than an open grassland.",
+    "expected_image": "deer_07.jpg"
   }
 ]

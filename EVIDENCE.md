@@ -270,3 +270,28 @@ Verified behavior:
 - Posts with no confident match do not create unsafe suggestions.
 
 This completes the human-in-the-loop review workflow required for the recommendation system.
+
+## Stage 6B - Labeled Evaluation Dataset
+
+Created a ground-truth evaluation dataset containing 10 labeled post-image pairs.
+
+Dataset coverage:
+
+- 2 fox evaluation posts
+- 2 wolf evaluation posts
+- 2 dog evaluation posts
+- 2 bear evaluation posts
+- 2 deer evaluation posts
+
+Each evaluation case contains:
+
+- A unique case identifier
+- A post title
+- Descriptive post content
+- One expected correct image
+
+The evaluation seed script was verified to be idempotent, preventing duplicate evaluation posts.
+
+All evaluation posts were embedded using `all-minilm`, allowing them to be compared against the existing image embeddings.
+
+The existing lion post remains separate as a negative test for the `No confident match` behavior.

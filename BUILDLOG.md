@@ -205,3 +205,18 @@ Verified behavior:
 - A pending suggestion can be rejected.
 - Reviewed suggestions cannot be reviewed again.
 - Posts with no confident match do not create a suggestion.
+
+## Stage 6B - Labeled Evaluation Dataset
+
+Created a labeled evaluation dataset for measuring image matching quality.
+
+- Added 10 evaluation posts across five animal categories: fox, wolf, dog, bear, and deer.
+- Added two evaluation cases per category.
+- Assigned one known correct image to each evaluation post.
+- Used visually descriptive post content so exact-image matching can be evaluated meaningfully.
+- Added an idempotent evaluation post seeding script.
+- Verified that all expected images exist in the image corpus.
+- Generated and stored embeddings for the evaluation posts using `all-minilm`.
+- Kept the lion post separate as a negative no-match test case.
+
+The evaluation dataset is now ready for automated Top-1 Precision measurement.
