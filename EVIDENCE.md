@@ -252,3 +252,21 @@ Behavior:
 - Second identical post submission -> `409 Conflict`
 
 Duplicate detection checks both the post title and content before creating a new record.
+
+## Stage 6A - Human Review API
+
+The review workflow successfully supports human approval and rejection of AI-generated image suggestions.
+
+Verified behavior:
+
+- Suggestions are created only when a confident image match exists.
+- New suggestions start with a `pending` status.
+- Each suggestion stores the selected image, similarity score, confidence, and guard reason.
+- A human reviewer can inspect why the image was recommended.
+- Approved suggestions are stored with an `approved` status.
+- Rejected suggestions are stored with a `rejected` status.
+- Human review notes are persisted.
+- A suggestion that has already been reviewed returns a conflict instead of allowing another decision.
+- Posts with no confident match do not create unsafe suggestions.
+
+This completes the human-in-the-loop review workflow required for the recommendation system.

@@ -184,3 +184,24 @@ Added duplicate protection to the post creation endpoint.
 - The API now checks for an existing post with the same title and content.
 - Identical duplicate posts return `409 Conflict` instead of creating another record.
 - Existing duplicate test data was cleaned up manually from PostgreSQL.
+
+## Stage 6A - Human Review API
+
+Implemented the human review workflow for image suggestions.
+
+- Added persistent suggestion records for recommended post-image pairs.
+- Added review records for approved and rejected suggestions.
+- Added endpoints to create, inspect, approve, and reject suggestions.
+- Added protection against reviewing the same suggestion more than once.
+- Added validation so suggestions rejected by the mismatch guard cannot be approved.
+- Added human review notes for approval and rejection decisions.
+- Verified that safe AI-generated suggestions can be reviewed independently by a human.
+
+Verified behavior:
+
+- A recommended image can be saved as a pending suggestion.
+- A human can inspect why the image was selected.
+- A pending suggestion can be approved.
+- A pending suggestion can be rejected.
+- Reviewed suggestions cannot be reviewed again.
+- Posts with no confident match do not create a suggestion.
