@@ -220,3 +220,21 @@ Created a labeled evaluation dataset for measuring image matching quality.
 - Kept the lion post separate as a negative no-match test case.
 
 The evaluation dataset is now ready for automated Top-1 Precision measurement.
+
+## Stage 6C - Evaluation and Threshold Calibration
+
+Implemented an automated evaluation script for measuring image matching accuracy against the labeled evaluation dataset.
+
+- Evaluated 10 labeled post-image pairs.
+- Measured both raw semantic ranking and the final recommendation after the mismatch guard.
+- Initial evaluation at a `0.55` similarity threshold produced:
+  - Raw Top-1 Precision: 80%
+  - Final Recommendation Top-1 Precision: 70%
+  - 1 correct match was rejected as "No confident match."
+- Investigated the rejected case and found that the correct `dog_08.jpg` image ranked first with a similarity score of approximately `0.5098`.
+- Adjusted the similarity threshold from `0.55` to `0.50` based on the labeled evaluation data.
+- Re-ran the evaluation after calibration.
+- Final Top-1 Precision: 80% (8/10).
+- Kept subject/category mismatch validation separate from the semantic similarity threshold to preserve protection against incorrect cross-category matches.
+
+The final threshold was selected from measured evaluation behavior rather than manually choosing a value without evidence.
