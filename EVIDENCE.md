@@ -408,3 +408,138 @@ AI batch jobs now estimate their maximum possible model calls using:
 `total items × maximum retry attempts`
 
 Jobs that exceed the configured AI call budget are rejected before processing begins.
+
+# Final Acceptance Evidence Index
+
+## Probe 1 - Batch Vision Processing and Low-Confidence Flagging
+
+Verified that the image corpus is processed through schema-validated vision analysis.
+
+A deliberately degraded robustness fixture produced:
+
+- File: ambiguous_02.jpg
+- Detected subject: human
+- Category: person
+- Confidence: 0.60
+- Flagged: true
+
+This confirms that low-confidence model output is flagged rather than silently accepted.
+
+## Probe 2 - Red Fox Semantic Matching
+
+Verified that a red fox article returns a fox recommendation and that semantically unrelated animal images rank lower.
+
+Semantic matching uses stored all-minilm embeddings and cosine similarity rather than filenames.
+
+## Probe 3 - Forced Wolf Rejection
+
+Verified that forcing a wolf image as the candidate for a fox post produces:
+
+- accepted = false
+- A subject/category mismatch explanation
+
+The mismatch guard rejects the candidate even when semantic similarity alone could otherwise appear acceptable.
+
+## Probe 4 - No Confident Match
+
+Verified that the lion article, for which the corpus contains no lion image, returns:
+
+- match_found = false
+- message = "No confident match."
+- recommendation = null
+- Human-readable rejection reasons
+
+The system does not automatically select the nearest unrelated image.
+
+## Probe 5 - Labeled Evaluation
+
+The final evaluation dataset contains 10 labeled post-image pairs.
+
+Final Recommendation Top-1 Precision:
+8/10 = 80.00%
+
+Final similarity threshold:
+0.50
+
+The ground-truth labels were not modified during threshold calibration.
+
+Evaluation output is stored in:
+data/eval_results.json
+
+## Probe 6 - AI Cost Attribution
+
+Vision and embedding calls are persisted in ai_cost_logs.
+
+Operations include:
+
+- vision_analysis using gemma3:4b
+- embedding_generation using all-minilm
+
+Because both models run through local Ollama, external monetary cost is $0, while calls remain individually attributed.
+
+## Shared Backend Requirements
+
+### Layered Architecture
+
+The project separates:
+
+- HTTP/API routes in app/api
+- Business and AI logic in app/services
+- Database models in app/models
+- Request and response validation in app/schemas
+
+### Boundary Validation
+
+Verified clean expected API errors:
+
+- Invalid input -> 422
+- Missing resource -> 404
+- Duplicate/conflicting operation -> 409
+
+### Background Processing
+
+Image analysis and embedding generation run through the database-backed worker.
+
+The worker includes:
+
+- Job state
+- Progress counters
+- Configurable retries
+- Retry delay
+- Durable error reporting
+
+### Persistence and Migrations
+
+PostgreSQL is used for persistent storage.
+
+Schema changes are tracked through Alembic migrations.
+
+Indexes and uniqueness constraints are defined for resources that require them.
+
+This capstone is designed as a single-system project and does not contain a tenant/account model, so tenant isolation is not applicable to the domain.
+
+### Idempotency
+
+Verified idempotent behavior includes:
+
+- Duplicate post protection
+- Duplicate active job protection
+- Embedding content hashes that avoid unnecessary regeneration
+- Idempotent dataset seeding
+- Suggestions cannot be reviewed more than once
+
+### Secrets
+
+Secrets are loaded from environment variables.
+
+.env is excluded from Git and .env.example contains only safe placeholder configuration.
+
+### Cost and Budget Guard
+
+Every AI operation is attributed through ai_cost_logs.
+
+Batch jobs estimate their worst-case AI calls using:
+
+total items x maximum attempts
+
+Jobs exceeding AI_MAX_CALLS_PER_JOB are rejected before processing.

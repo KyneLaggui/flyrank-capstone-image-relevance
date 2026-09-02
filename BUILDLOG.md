@@ -267,3 +267,33 @@ Hardened the image matching backend and added focused automated tests for the sy
 - Re-ran the required matching safety scenarios successfully.
 
 Stage 6D confirms that unsafe or uncertain AI output is rejected or flagged rather than silently trusted.
+
+## Stage 6E - Final Packaging and Submission Preparation
+
+Completed the final capstone packaging and reproducibility review.
+
+- Finalized the README with architecture, setup, run, seed, evaluation, test, API, and limitations documentation.
+- Added capstone.yaml with the run command, seed command, test command, base URL, and evaluator-facing endpoints.
+- Finalized .env.example with safe local configuration values and no secrets.
+- Made the degraded low-confidence robustness fixture reproducible from the seeded image corpus.
+- Documented the calibrated semantic similarity threshold of 0.50.
+- Documented the measured Top-1 Precision from the labeled evaluation set.
+- Confirmed the automated test suite passes with 13 tests.
+- Confirmed low-confidence AI output is flagged rather than silently trusted.
+- Confirmed the human review workflow supports suggestion inspection, approval, and rejection.
+- Reviewed repository structure, secrets handling, dataset reproducibility, and submission requirements.
+
+### AI-Assisted Development Notes
+
+AI tools were used during development to help break the capstone into incremental stages, review implementation ideas, explain backend concepts, draft tests, and improve documentation.
+
+AI-generated suggestions were not accepted without testing.
+
+Notable corrections during development included:
+
+- The initial Gemini implementation reached free-tier rate limits, so the vision pipeline was changed to local Ollama with gemma3:4b.
+- The first semantic similarity threshold of 0.55 rejected a known-correct evaluation match, so the threshold was recalibrated to 0.50 using labeled evaluation results.
+- A degraded image exposed vision-model overconfidence by being incorrectly classified with high confidence. The vision prompt was improved with explicit confidence-calibration rules and a second degraded fixture successfully produced a low-confidence result that was flagged.
+- Automated tests and acceptance probes were used to verify AI-assisted implementation decisions before finalizing them.
+
+The final system behavior and documentation are based on observed tests and evaluation results rather than assumed AI correctness.

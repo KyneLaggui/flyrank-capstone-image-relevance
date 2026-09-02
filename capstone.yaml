@@ -1,0 +1,33 @@
+run: "docker compose up -d --wait && alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+
+seed: "python -m scripts.seed_images && python -m scripts.create_ambiguous_fixture && python -m scripts.seed_robustness_fixture && python -m scripts.seed_eval_posts"
+
+test: "python -m pytest -v"
+
+base_url: "http://127.0.0.1:8000"
+
+endpoints:
+  - method: GET
+    path: /health
+  - method: POST
+    path: /posts
+  - method: GET
+    path: /posts/{post_id}/rank-images
+  - method: GET
+    path: /posts/{post_id}/check-image/{image_id}
+  - method: GET
+    path: /posts/{post_id}/images
+  - method: POST
+    path: /jobs/image-processing
+  - method: POST
+    path: /jobs/embedding-generation
+  - method: GET
+    path: /jobs/{job_id}
+  - method: POST
+    path: /suggestions
+  - method: GET
+    path: /suggestions/{suggestion_id}
+  - method: POST
+    path: /suggestions/{suggestion_id}/approve
+  - method: POST
+    path: /suggestions/{suggestion_id}/reject
